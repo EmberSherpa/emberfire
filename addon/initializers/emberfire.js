@@ -18,6 +18,11 @@ export default {
   name: 'emberfire',
   before: 'ember-data',
   initialize: function (container, app) {
+    var config = container.lookupFactory('config:environment');
+    if (config.disableFirebase) {
+      return;
+    }
+    
     app.register('adapter:-firebase', FirebaseAdapter);
     app.register('serializer:-firebase', FirebaseSerializer);
 
